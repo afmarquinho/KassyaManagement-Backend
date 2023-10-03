@@ -1,14 +1,14 @@
 import {
   isEmpty,
   isNumber,
-  isString,
   isAlphaNumeric,
+  isPositiveInteger,
 } from "../helpers/validations.js";
 import Inventory from "../models/Inventory.js";
 
 const listItems = async (req, res) => {
-  const items = await Inventory.find();
   try {
+    const items = await Inventory.find();
     res.json(items);
   } catch (error) {
     console.log(error);
@@ -32,11 +32,11 @@ const addItem = async (req, res) => {
     const error = new Error("Ingrese una referencia válida");
     return res.status(404).json({ status: "error", msg: error.message });
   }
-  if (!isEmpty(item.supplier)) {
-    const error = new Error("Ingrese un proveedor válido");
+  if (!isNumber(item.supplier)) {
+    const error = new Error("Ingrese un id de proveedor válido");
     return res.status(404).json({ status: "error", msg: error.message });
   }
-  if (!isNumber(item.amount)) {
+  if (!isPositiveInteger(item.amount)) {
     const error = new Error("Ingrese una cantidad válida");
     return res.status(404).json({ status: "error", msg: error.message });
   }
@@ -44,7 +44,7 @@ const addItem = async (req, res) => {
     const error = new Error("Ingrese una unidad válida");
     return res.status(404).json({ status: "error", msg: error.message });
   }
-  if (!isNumber(item.unitPrice)) {
+  if (!isPositiveInteger(item.unitPrice)) {
     const error = new Error("Ingrese un precio válido");
     return res.status(404).json({ status: "error", msg: error.message });
   }
@@ -89,7 +89,6 @@ const editItem = async (req, res) => {
   }
 };
 const deleteItem = async (req, res) => {
-  
   const { id } = req.params;
   try {
     const deletedItem = await Inventory.findByIdAndRemove(id);
@@ -108,4 +107,23 @@ const deleteItem = async (req, res) => {
     return res.status(404).json({ status: "error", msg: err.message });
   }
 };
-export { listItems, addItem, editItem, deleteItem };
+const getItem = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const item = await Inventory.findById(id);
+    if (!item) {
+      const error = new Error("Artículo no encontrado");
+      return res.status(404).json({ msg: error.message });
+    }
+    res.status(200).json({
+      status: "success",
+      msg: "Artículo encontrado con éxito",
+      data: item,
+    });
+  } catch (error) {
+    console.log(error);
+    const err = new Error("Error al mostrar arículo");
+    return res.status(404).json({ status: "error", msg: err.message });
+  }
+};
+export { listItems, addItem, editItem, deleteItem, getItem };

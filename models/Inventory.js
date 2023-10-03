@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
+
 
 const inventorySchema = mongoose.Schema(
   {
@@ -14,9 +15,8 @@ const inventorySchema = mongoose.Schema(
       unique: true,
     },
     supplier: {
-      type: String,
-      trim: true,
-      require: true,
+      type: Schema.Types.ObjectId, 
+    ref: 'Supplier'     
     },
     amount: {
       type: Number,
