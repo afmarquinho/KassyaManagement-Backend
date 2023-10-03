@@ -11,6 +11,7 @@ const inventorySchema = mongoose.Schema(
       type: String,
       trim: true,
       require: true,
+      unique: true,
     },
     supplier: {
       type: String,
