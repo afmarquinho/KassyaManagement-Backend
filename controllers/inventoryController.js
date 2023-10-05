@@ -32,10 +32,6 @@ const addItem = async (req, res) => {
     const error = new Error("Ingrese una referencia válida");
     return res.status(404).json({ status: "error", msg: error.message });
   }
-  if (!isNumber(item.supplier)) {
-    const error = new Error("Ingrese un id de proveedor válido");
-    return res.status(404).json({ status: "error", msg: error.message });
-  }
   if (!isPositiveInteger(item.amount)) {
     const error = new Error("Ingrese una cantidad válida");
     return res.status(404).json({ status: "error", msg: error.message });
