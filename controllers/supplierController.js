@@ -16,7 +16,7 @@ const addSupplier = async (req, res) => {
     return res.status(404).json({ status: "error", msg: error.message });
   }
   if (!isAlphaNumeric(supplier.nif)) {
-    const error = new Error("Ingrese un ID válido");
+    const error = new Error("Ingrese un ID/NIF/NIT válido");
     return res.status(404).json({ status: "error", msg: error.message });
   }
   if (!isString(supplier.entity)) {
@@ -71,7 +71,7 @@ const addSupplier = async (req, res) => {
     const savedSupplier = await supplier.save();
     res.status(201).json({
       status: "success",
-      msg: "Artículo guardado exitosamente",
+      msg: "Proveedor guardado exitosamente",
       data: savedSupplier,
     });
   } catch (error) {
