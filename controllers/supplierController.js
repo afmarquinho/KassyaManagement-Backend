@@ -27,6 +27,10 @@ const addSupplier = async (req, res) => {
     const error = new Error("Ingrese un país válido");
     return res.status(404).json({ status: "error", msg: error.message });
   }
+  if (!isString(supplier.city)) {
+    const error = new Error("Ingrese una ciudad válida");
+    return res.status(404).json({ status: "error", msg: error.message });
+  }
   if (!isAlphaNumeric(supplier.address)) {
     const error = new Error("Ingrese una dirección válida");
     return res.status(404).json({ status: "error", msg: error.message });

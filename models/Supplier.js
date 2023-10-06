@@ -25,6 +25,11 @@ const supplierSchema = mongoose.Schema(
       trim: true,
       require: true,
     },
+    city: {
+      type: String,
+      trim: true,
+      require: true,
+    },
     address: {
       type: String,
       trim: true,
