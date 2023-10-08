@@ -89,7 +89,7 @@ const deleteItem = async (req, res) => {
   try {
     const deletedItem = await Inventory.findByIdAndRemove(id);
     if (!deletedItem) {
-      const error = new Error("No artículo encontrado");
+      const error = new Error("Artículo no encontrado");
       return res.status(404).json({ msg: error.message });
     }
     res.status(200).json({
