@@ -115,6 +115,31 @@ const getSupplier = async (req, res) => {
     const err = new Error("Error al mostrar el proveedor");
     return res.status(404).json({ status: "error", msg: err.message });
   }
-
 };
-export { addSupplier, listSupplier, getSupplier };
+const editSupplier = async (req, res) => {
+  const { id } = req.params;
+  const updates = req.body; // Obtén las actualizaciones del cuerpo de la solicitud
+  try {
+    const editedSupplier = await Supplier.findByIdAndUpdate(id, updates, {
+      new: true, // Esto devuelve el documento actualizado en lugar del antiguo
+      runValidators: true, // Esto aplica las validaciones de tu modelo
+    });
+
+    if (!editedSupplier) {
+      const error = new Error("Proveedor no encontrado");
+      return res.status(404).json({ msg: error.message });
+    }
+
+    res.status(201).json({
+      status: "success",
+      msg: "Proveedor actualizado",
+      data: editedSupplier,
+    });
+  } catch (error) {
+    console.error(error);
+    const err = new Error("Error al editar el proveedor en la base de datos");
+    return res.status(404).json({ status: "error", msg: err.message });
+  }
+};
+
+export { addSupplier, listSupplier, getSupplier, editSupplier };
