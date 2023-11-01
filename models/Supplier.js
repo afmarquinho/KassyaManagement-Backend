@@ -14,6 +14,23 @@ const supplierSchema = mongoose.Schema(
       require: true,
       unique: true,
     },
+    category: {
+      type: String,
+      trim: true,
+      require: true,
+      enum: [
+        "Tecnología y software",
+        "Suministros de oficina",
+        "Serviciio de limpieza",
+        "Servicois logísticos",
+        "Proveedores de alimentos y bebidas",
+        "Servicios de mantenimiento",
+        "Servicios de consultoría",
+        "Proveedores de servicios públicos",
+        " Gestión humana y contrataciones",
+        "Marketing y publicidad",
+      ],
+    },
     entity: {
       type: String,
       trim: true,

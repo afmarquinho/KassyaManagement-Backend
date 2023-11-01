@@ -141,5 +141,24 @@ const editSupplier = async (req, res) => {
     return res.status(404).json({ status: "error", msg: err.message });
   }
 };
+const deleteSupplier = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletedSupplier = await Supplier.findByIdAndRemove(id);
+    if (!deletedSupplier) {
+      const error = new Error("Proveedor no encontrado");
+      return res.status(404).json({ msg: error.message });
+    }
+    res.status(200).json({
+      success: true,
+      msg: "Proveedor eliminado con éxito",
+      data: deletedSupplier,
+    });
+  } catch (error) {
+    console.log(error);
+    const err = new Error("Error al eliminar el proveedor");
+    return res.status(404).json({ status: "error", msg: err.message });
+  }
+};
 
-export { addSupplier, listSupplier, getSupplier, editSupplier };
+export { addSupplier, listSupplier, getSupplier, editSupplier, deleteSupplier };
