@@ -40,7 +40,7 @@ const addItem = async (req, res) => {
     const error = new Error("Ingrese una unidad válida");
     return res.status(404).json({ status: "error", msg: error.message });
   }
-  if (!isPositiveInteger(item.unitPrice)) {
+  if (!isPositiveInteger(item.unitCost)) {
     const error = new Error("Ingrese un precio válido");
     return res.status(404).json({ status: "error", msg: error.message });
   }
@@ -70,7 +70,7 @@ const editItem = async (req, res) => {
   item.supplier = req.body.supplier || item.supplier;
   item.amount = req.body.amount || item.amount;
   item.unit = req.body.unit || item.unit;
-  item.unitPrice = req.body.unitPrice || item.unitPrice;
+  item.unitCost = req.body.unitCost || item.unitCost;
   try {
     const editedItem = await item.save();
     res.status(201).json({
