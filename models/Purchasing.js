@@ -20,9 +20,8 @@ const purchasingSchema = mongoose.Schema(
           require: true,
         },
         supplier: {
-          type: String,
-          trim: true,
-          require: true,
+          type: Schema.Types.ObjectId,
+          ref: "Supplier",
         },
         anount: {
           type: Number,
@@ -40,6 +39,26 @@ const purchasingSchema = mongoose.Schema(
           trim: true,
           require: true,
         },
+        department: {
+          type: String,
+          trim: true,
+          require: true,
+          enum: [
+            "Gestión Humana",
+            "Postventas",
+            "Comercial",
+            "Administración",
+            "Calidad",
+            "Logística",
+            "Producción",
+          ],
+        },
+        subTotal: {
+          type: Number,
+          trim: true,
+          require: true,
+        },
+
       },
     ],
     status: {
@@ -55,9 +74,8 @@ const purchasingSchema = mongoose.Schema(
         "En bodega",
       ],
     },
-
-    department: {
-      type: String,
+    total: {
+      type: Number,
       trim: true,
       require: true,
     },
@@ -65,8 +83,9 @@ const purchasingSchema = mongoose.Schema(
       type: String,
       trim: true,
       require: true,
-      enum: ["Efectivo", "Transferencia", "Consignación"],
+      enum: ["Efectivo", "Transferencia", "Consignación", "Cheque"],
     },
+
     comments: {
       type: String,
       trim: true,

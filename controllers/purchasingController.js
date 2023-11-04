@@ -4,13 +4,15 @@ import Purchasing from "../models/Purchasing.js";
 const addNewPurchasing = async (req, res) => {
   const purchasing = new Purchasing(req.body);
   try {
-    const savedPurchasing = await purchasing.saved();
+    const savedPurchasing = await purchasing.save();
     res.status(201).json({
       status: "success",
       msg: "Orden creada exitosamente",
       data: savedPurchasing,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 //? Listar todas las ordenes
 const listPurchasing = async (req, res) => {
