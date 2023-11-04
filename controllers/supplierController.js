@@ -93,7 +93,7 @@ const listSupplier = async (req, res) => {
     console.log(error);
     res.satus(500).json({
       status: "error",
-      msg: "Error al mostrar el los proveedores",
+      msg: "Error al mostrar los proveedores",
     });
   }
 };

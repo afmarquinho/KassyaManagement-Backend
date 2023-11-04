@@ -28,7 +28,7 @@ const inventorySchema = mongoose.Schema(
       require: true,
     },
 
-    unitPrice: {
+    unitCost: {
       type: Number,
       trim: true,
       require: true,

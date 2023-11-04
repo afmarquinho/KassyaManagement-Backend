@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import inventoryRoutes from "./router/inventoryRoutes.js";
 import supplierRoutes from "./router/supplierRoutes.js";
+import purchasingRoutes from "./router/purchasingRoutes.js";
+
 import cors from "cors"
 
 
@@ -20,6 +22,7 @@ app.use(
 );
 app.use("/api/inventory", inventoryRoutes);
 app.use("/api/supplier", supplierRoutes);
+app.use("/api/purchasing", purchasingRoutes);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
