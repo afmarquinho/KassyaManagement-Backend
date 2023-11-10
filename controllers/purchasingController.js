@@ -40,4 +40,25 @@ const countOrders = async (req, res) => {
     res.status(500).json({ error: "Error al obtener el conteo de órdenes" });
   }
 };
-export { addNewPurchasing, listPurchasing, countOrders };
+
+const getOrder = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const order = await Purchasing.findById(id);
+    if (!order) {
+      const error = new Error("Órden no encontrada");
+      return res.status(404).json({ msg: error.message });
+    }
+    res.status(200).json({
+      status: "success",
+      msg: "Órden encontrada con éxito",
+      data: order,
+    });
+  } catch (error) {
+    console.log(error);
+    const err = new Error("Error al mostrar la órden");
+    return res.status(404).json({ status: "error", msg: err.message });
+  }
+};
+
+export { addNewPurchasing, listPurchasing, countOrders, getOrder };

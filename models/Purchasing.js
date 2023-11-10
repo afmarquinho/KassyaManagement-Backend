@@ -23,7 +23,7 @@ const purchasingSchema = mongoose.Schema(
           type: Schema.Types.ObjectId,
           ref: "Supplier",
         },
-        anount: {
+        amount: {
           type: Number,
           trim: true,
           require: true,
@@ -32,7 +32,7 @@ const purchasingSchema = mongoose.Schema(
           type: String,
           trim: true,
           require: true,
-          enum: ["Unidad", "Gramos", "Litros", "Kilogramos"],
+          enum: ["uni", "g", "l", ",k"],
         },
         unitCost: {
           type: Number,
