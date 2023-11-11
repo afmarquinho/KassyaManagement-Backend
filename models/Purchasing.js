@@ -70,7 +70,7 @@ const purchasingSchema = mongoose.Schema(
         "Rechazada",
         "Aprobada",
         "En pago",
-        "Confirmada",
+        "En espera",
         "En bodega",
       ],
     },

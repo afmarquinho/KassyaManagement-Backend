@@ -61,4 +61,30 @@ const getOrder = async (req, res) => {
   }
 };
 
-export { addNewPurchasing, listPurchasing, countOrders, getOrder };
+const editOrder = async (req, res) => {
+  const { id } = req.params;
+  const updates = req.body; 
+  try {
+    const editedOrder = await Purchasing.findByIdAndUpdate(id, updates, {
+      new: true, // Esto devuelve el documento actualizado en lugar del antiguo
+      runValidators: true, // Esto aplica las validaciones de tu modelo
+    });
+
+    if (!editedOrder) {
+      const error = new Error("Orden no encontrada en la BBDD");
+      return res.status(404).json({ msg: error.message });
+    }
+
+    res.status(201).json({
+      status: "success",
+      msg: "Orden actualizada",
+      data: editedOrder,
+    });
+  } catch (error) {
+    console.error(error);
+    const err = new Error("Error al editar la órden en la base de datos");
+    return res.status(404).json({ status: "error", msg: err.message });
+  }
+};
+
+export { addNewPurchasing, listPurchasing, countOrders, getOrder, editOrder };
