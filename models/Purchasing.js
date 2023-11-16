@@ -32,7 +32,7 @@ const purchasingSchema = mongoose.Schema(
           type: String,
           trim: true,
           require: true,
-          enum: ["uni", "g", "l", ",k"],
+          enum: ["uni", "g", "l", "k"],
         },
         unitCost: {
           type: Number,
@@ -59,6 +59,26 @@ const purchasingSchema = mongoose.Schema(
           require: true,
         },
 
+        localization: {
+            type: String,
+            trim: true,
+            require: true,
+            enum: ["En espera", "En bodega"],
+            default: "En espera",
+          },
+          checked: {
+            type: String,
+            trim: true,
+            require: true,
+            enum: ["Yes", "No"],
+            default: "No",
+          },
+          itemComments: {
+            type: String,
+            trim: true,
+            require: false,
+            default: "",
+          },
       },
     ],
     status: {
@@ -70,8 +90,9 @@ const purchasingSchema = mongoose.Schema(
         "Rechazada",
         "Aprobada",
         "En pago",
+        "Orden Enviada",
         "En espera",
-        "En bodega",
+        "Finalizada",
       ],
     },
     total: {
@@ -90,6 +111,12 @@ const purchasingSchema = mongoose.Schema(
       type: String,
       trim: true,
       require: true,
+    },
+    moreComments: {
+      type: String,
+      trim: true,
+      require: false,
+      default: "",
     },
   },
   { timestamps: true }
